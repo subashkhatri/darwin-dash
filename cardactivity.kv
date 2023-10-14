@@ -1,0 +1,129 @@
+<CardActivityScreen>:
+    orientation: 'vertical'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10  # spacing between children
+
+        # Header section containing the two cards
+        BoxLayout:
+            size_hint_y: None  # This ensures it only takes up as much space as it needs
+            height: '200dp'  # Setting a fixed height
+            orientation: 'horizontal'
+            padding: '10dp', '20dp'
+
+            # Order New Card Section
+            MDCard:
+                orientation: 'horizontal'
+                pos_hint: {"center_x": 0.5}
+                radius: [8]
+                elevation: 0
+                md_bg_color: (0, 0, 0, 0)
+                border_color: (1, 0.5, 0.2, 1)
+                
+                MDFloatingActionButton:
+                    icon: "plus"
+                    user_font_size: "50sp"
+                    md_bg_color: (1, 0.5, 0.2, 1)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.current = 'order_card'
+
+
+            # Card Details Section
+            MDCard:
+                orientation: 'vertical'
+                pos_hint: {"center_x": 0.5}
+                md_bg_color: (1, 0.5, 0.2, 1)
+
+                MDLabel:
+                    text: app.card_info["balance"]
+                    text_color: ('white')
+                    font_style: "H5"
+                    halign: 'center'
+
+                MDLabel:
+                    text: app.card_info["number"] + "\n" + app.card_info["type"]
+                    font_style: "H6"
+                    text_color: ('white')
+                    halign: 'center'
+
+        # Transaction history
+        ScrollView:
+            MDList:
+                id: transaction_list
+
+        # Bottom Navigation
+        MDBottomNavigation:
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Home'
+                icon: 'home'
+                on_tab_release: app.go_back()
+            MDBottomNavigationItem:
+                name: 'screen 2'
+                text: 'Travel activity'
+                icon: 'train'
+                on_tab_release: app.go_back()
+            MDBottomNavigationItem:
+                name: 'screen 3'
+                text: 'New trip'
+                icon: 'walk'
+                on_tab_release: app.go_back()
+            MDBottomNavigationItem:
+                name: 'screen 4'
+                text: 'Saved trips'
+                icon: 'bookmark-outline'
+                on_tab_release: app.go_back()
+            MDBottomNavigationItem:
+                name: 'screen 5'
+                text: 'More'
+                icon: 'dots-horizontal'
+                on_tab_release: app.go_back()
+
+<OrderCardScreen>:
+    FloatLayout:
+        
+        MDCard:
+            orientation: 'vertical'
+            size_hint: 0.9, 0.5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            spacing: 10
+            padding: 10
+
+            MDTextField:
+                id: name_input
+                hint_text: 'Name'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+
+            MDTextField:
+                id: card_number_input
+                hint_text: 'Card Number'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+            MDTextField:
+                id: card_type_input
+                hint_text: 'Card Type'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+
+            MDTextField:
+                id: dob_input
+                hint_text: 'Date of Birth (DD-MM-YYYY)'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+
+            BoxLayout:
+                size_hint_y: None
+                height: '48dp'
+                spacing: 10
+                pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+
+                MDRaisedButton:
+                    text: 'Submit'
+                    md_bg_color: (1, 0.5, 0.2, 1)
+                    on_release: app.root.current = 'card_activity'
+                
+                MDRaisedButton:
+                    text: 'Cancel'
+                    on_release:  app.root.current = 'card_activity'
+
+
